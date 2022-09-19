@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>汉字写写</title>
+        <style>
+            .fixedPos {
+                margin: 4px;
+                position: absolute;
+                /*padding: 5px; 
+                width: 98%;
+                height: 98%; */
+            }
+
+            .header {
+                margin: 4px;
+                padding: 4px;
+                border: solid 1px green;                
+            }
+
+            body {
+                overflow: hidden;
+            }
+        </style>
+    </head>
+
+    <body onload = "javascript: init();" 
+        onresize="javascript: resize();"
+        onselectstart="javascript: {return false};">
+        <div class = "header" id = "header">
+            字框大小
+            <button id = "smaller">- 减小(Smaller)</button>
+            <button id = "bigger">+ 增大(Bigger)</button>
+            |
+            <button id = "clear">清除(Clear)</button>
+            | 笔粗细
+            <button id = "thiner">-</button>
+            <button id = "thicker">+</button>
+            <label id = "penwidth">2</label>
+            | 笔颜色
+            <button id = "color1" onclick = "javascript: colorClicked(this, event)">&nbsp;</button>
+            <button id = "color2" onclick = "javascript: colorClicked(this, event)">&nbsp;</button>
+            <button id = "color3" onclick = "javascript: colorClicked(this, event)">&nbsp;</button>
+            |<label for = "text">描字：</label>
+            <input id = "text" onkeyup="javascript: txtKeyUp(event)" value = "我是中国人"></input>
+
+        </div>
+        <canvas id="cvsbg" class="fixedPos"></canvas>
+        <canvas id="cvspt" class="fixedPos"></canvas>
+    </body>
+    
+    <script type="text/javascript" src="scripts/main.js"></script>
+</html>                
