@@ -143,6 +143,14 @@ function calcRowAndCol() {
     drawBg()
 }
 
+function beforePrint() {
+    headerContainer.style.display = "none"
+}
+
+function afterPrint() {
+    headerContainer.style.display = "block"
+}
+
 function resize() {
     let newWidth = window.innerWidth - margin
     let newHeight = window.innerHeight - margin - 30

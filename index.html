@@ -27,7 +27,9 @@
 
     <body onload = "javascript: init();" 
         onresize="javascript: resize();"
-        onselectstart="javascript: {return false};">
+        onselectstart="javascript: {return false};"
+        onbeforeprint="javascript: beforePrint();"
+        onafterprint="javascript: afterPrint();">
         <div class = "header" id = "header">
             字框大小
             <button id = "smaller">- 减小(Smaller)</button>
