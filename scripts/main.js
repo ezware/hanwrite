@@ -15,6 +15,8 @@ var btnColor2 = undefined;
 var btnColor3 = undefined;
 var txtText = undefined;
 var lblPenWidth = undefined;
+var imgBig = undefined;
+var divContent = undefined;
 
 var fpstimer = undefined;
 
@@ -25,6 +27,7 @@ var block_pixels = 80;
 var block_space = 8;
 var half_block_pixels = Math.floor(block_pixels / 2);
 var margin = 20;
+var topOffset = 40;
 
 var penWidth = 2
 
@@ -52,6 +55,7 @@ var ptdata = {
 };
 
 function getDomObjects() {
+    divContent = document.getElementById("content")
     cvsbg = document.getElementById("cvsbg");
     cvspt = document.getElementById("cvspt");
     ctxbg = cvsbg.getContext('2d')
@@ -78,13 +82,14 @@ function getDomObjects() {
     btnColor3.style.borderWidth = 0
 
     txtText = document.getElementById("text");
+    imgBig = document.getElementById("bigimg");
 }
 
 function attachEvents() {
     cvspt.addEventListener('mousedown', ptMouseDown)
     cvspt.addEventListener('mousemove', ptMouseMove)
     cvspt.addEventListener('mouseup', ptMouseUp)
-    
+
     cvspt.addEventListener('touchstart', ptTouchStart)
     cvspt.addEventListener('touchmove', ptTouchMove)
     cvspt.addEventListener('touchend', ptTouchEnd)
@@ -125,6 +130,7 @@ function colorClicked(who, e) {
 
 function init() {
     getDomObjects()
+    topOffset = headerContainer.offsetHeight + 10
     resize()
     bgdataInit()
     ptdataInit()
@@ -151,9 +157,27 @@ function afterPrint() {
     headerContainer.style.display = "block"
 }
 
+function showBigImg(who, e) {
+    imgBig.src = who.src
+    console.log(e)
+    if (e.x + imgBig.width > window.width) {
+        imgBig.left = window.width - imgBig.width - 10
+    } else {
+        imgBig.left = e.x
+    }
+    divContent.style.display = "none"
+    imgBig.style.display = "block"
+}
+
+function hideBigImg() {
+    imgBig.style.display = "none"
+    divContent.style.display = "block"
+}
+
 function resize() {
     let newWidth = window.innerWidth - margin
-    let newHeight = window.innerHeight - margin - 30
+    let newHeight = window.innerHeight - margin - topOffset
+
     let sizeChanged = false
 
     //newHeight = (Math.floor(newHeight / 2) + 1) * 2
@@ -174,7 +198,7 @@ function resize() {
 
     if (sizeChanged)
     {
-        calcRowAndCol()        
+        calcRowAndCol()
     }
 }
 
@@ -247,7 +271,7 @@ function drawBlock(x, y)
     ctxbg.strokeRect(x, y, block_pixels, block_pixels)
 
     //draw assist line
-    ctxbg.lineWidth = 1;    
+    ctxbg.lineWidth = 1;
     ctxbg.setLineDash([8, 8]);
     ctxbg.strokeStyle = "silver"
     //draw *
@@ -311,7 +335,7 @@ function drawBg() {
                     color = ghostColor
                 }
                 drawText(x + half_block_pixels, y + half_block_pixels, word, color);
-            }            
+            }
         }
     }
 
@@ -408,12 +432,12 @@ function ptMouseUp(e) {
 }
 
 function ptMouseMove(e) {
-   ptMove(e.offsetX, e.offsetY);   
+   ptMove(e.offsetX, e.offsetY);
 }
 
 function getTouchPos(x, y) {
     return {
-        x: Math.floor(x - cvspt.offsetLeft), 
+        x: Math.floor(x - cvspt.offsetLeft),
         y: Math.floor(y - cvspt.offsetTop)
     }
 }
@@ -430,7 +454,7 @@ function ptTouchEnd(e) {
     ptEnd(pos.x, pos.y)
 }
 
-function ptTouchMove(e) {   
+function ptTouchMove(e) {
    if (!drawing) return
 
    let tp = e.touches[0]

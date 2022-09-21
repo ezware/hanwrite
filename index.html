@@ -8,15 +8,26 @@
             .fixedPos {
                 margin: 4px;
                 position: absolute;
-                /*padding: 5px; 
-                width: 98%;
-                height: 98%; */
             }
 
             .header {
                 margin: 4px;
                 padding: 4px;
                 border: solid 1px green;                
+            }
+
+            .bar li{
+                float: left
+            }
+
+            .bigimg {
+                position:absolute;
+                display: none;
+                /* background-color: rgb(255,201,14); */
+            }
+
+            .linepading {
+                line-height: 30px;
             }
 
             body {
@@ -31,7 +42,10 @@
         onbeforeprint="javascript: beforePrint();"
         onafterprint="javascript: afterPrint();">
         <div class = "header" id = "header">
-            字框大小
+            <table width="100%">
+                <tr>
+                    <td class = "linepading">
+            大小：
             <button id = "smaller">- 减小(Smaller)</button>
             <button id = "bigger">+ 增大(Bigger)</button>
             |
@@ -44,13 +58,24 @@
             <button id = "color1" onclick = "javascript: colorClicked(this, event)">&nbsp;</button>
             <button id = "color2" onclick = "javascript: colorClicked(this, event)">&nbsp;</button>
             <button id = "color3" onclick = "javascript: colorClicked(this, event)">&nbsp;</button>
-            |<label for = "text">描字：</label>
+            <br/><label for = "text">描字：</label>
             <input id = "text" onkeyup="javascript: txtKeyUp(event)" value = "我是中国人"></input>
-
+            </td>
+            <td align="right">
+            <img width="64" height="64" src = "images/wxdonate.jpg" alt="donate a cup of beer" 
+                onmouseover="javascript:showBigImg(this, event)"
+                onmouseout="javascript:hideBigImg()"/>            
+            </td>
+            </tr>
+        </table>        
         </div>
-        <canvas id="cvsbg" class="fixedPos"></canvas>
-        <canvas id="cvspt" class="fixedPos"></canvas>
+        <img id="bigimg" class="bigimg"/>
+        
+        <div id="content">
+            <canvas id="cvsbg" class="fixedPos"></canvas>
+            <canvas id="cvspt" class="fixedPos"></canvas>
+        </div>
     </body>
     
     <script type="text/javascript" src="scripts/main.js"></script>
-</html>                
+</html>
