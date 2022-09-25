@@ -29,7 +29,7 @@ var half_block_pixels = Math.floor(block_pixels / 2);
 var margin = 20;
 var topOffset = 40;
 
-var penWidth = 2
+var penWidth = 5
 
 var color1 = "blue"
 var color2 = "red"
@@ -131,6 +131,7 @@ function colorClicked(who, e) {
 function init() {
     getDomObjects()
     topOffset = headerContainer.offsetHeight + 10
+    lblPenWidth.innerText = penWidth
     resize()
     bgdataInit()
     ptdataInit()
@@ -158,6 +159,13 @@ function afterPrint() {
 }
 
 function showBigImg(who, e) {
+    /*
+    if (imgBig.style.display == "block") {
+        hideBigImg()
+        return
+    }
+    */
+
     imgBig.src = who.src
     console.log(e)
     if (e.x + imgBig.width > window.width) {
@@ -446,6 +454,7 @@ function ptTouchStart(e) {
     let tp = e.touches[0]
     let pos = getTouchPos(tp.clientX, tp.clientY)
     ptBegin(pos.x, pos.y)
+    event.preventDefault()
 }
 
 function ptTouchEnd(e) {

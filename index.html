@@ -5,6 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>汉字写写</title>
         <style>
+            label, canvas, div {
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
             .fixedPos {
                 margin: 4px;
                 position: absolute;
@@ -30,6 +39,12 @@
                 line-height: 30px;
             }
 
+            .icon {
+                width: 24px;
+                height: 24px;
+                float: none;
+            }
+
             body {
                 overflow: hidden;
             }
@@ -45,16 +60,20 @@
             <table width="100%">
                 <tr>
                     <td class = "linepading">
-            大小：
-            <button id = "smaller">- 减小(Smaller)</button>
-            <button id = "bigger">+ 增大(Bigger)</button>
-            |
-            <button id = "clear">清除(Clear)</button>
-            | 笔粗细
+            <label>大小：</label>
+            <img id = "smaller" class="icon" src="images/smaller.jpg" alt="- 减小(Smaller)"/>
+            <img id = "bigger" class="icon" src="images/bigger.jpg" alt="+ 增大(Bigger)"/>
+            <img class="icon" src="images/spliter.png"/>
+            <img id = "clear" class="icon" src="images/clear.png" alt="清除(Clear)"/>
+            <img class="icon" src="images/spliter.png"/>
+            <!--label>笔粗细</label-->
+            <img class="icon" src="images/penwidth.jpg" alt="笔粗细"/>
             <button id = "thiner">-</button>
             <button id = "thicker">+</button>
             <label id = "penwidth">2</label>
-            | 笔颜色
+            <img class="icon" src="images/spliter.png"/>
+            <!--label>笔颜色</label-->
+            <img class="icon" src="images/pen.jpg" alt="笔颜色"/>
             <button id = "color1" onclick = "javascript: colorClicked(this, event)">&nbsp;</button>
             <button id = "color2" onclick = "javascript: colorClicked(this, event)">&nbsp;</button>
             <button id = "color3" onclick = "javascript: colorClicked(this, event)">&nbsp;</button>
